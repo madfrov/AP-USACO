@@ -72,38 +72,4 @@ print(m[3])
 ```
 
 
-```
-n, m = map(int, input().split())
-s = input()
-s = s[n-1] + s
-
-a = []
-sum = 0
-
-for i in range(n):
-    a.append(int(input()))
-    sum += a[i]
-
-ans = 0
-
-for i in range(n+1):
-    if s[i] == 'R' and s[i+1] == 'L':
-        l = 0
-        r = 0
-        lpos = i - 1 if i - 1 >= 0 else i - 1 + n
-        rpos = i + 2 if i + 2 <= n else i + 2 - n
-        while s[lpos] == 'R':
-            l += a[lpos]
-            lpos -= 1
-            if lpos < 0:
-                lpos += n
-        while s[rpos] == 'L':
-            r += a[rpos]
-            rpos += 1
-            if rpos > n:
-                rpos -= n
-        ans += min(m, l) + min(m, r)
-
-print(sum - ans)
-```
 
