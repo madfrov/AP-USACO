@@ -43,7 +43,7 @@ FJ 决定采用这样的方法来解决这个问题：让某些奶牛**顺时针
 ```
 33
 ```
-## Answers in Python
+Answers 1 in Python
 ```
 n = int(input())  # 读取房间数量
 a = []            # 存放每头奶牛所在房间编号的列表
@@ -89,5 +89,42 @@ for i in range(n):
 
 print(ans)
 
+```
+Answers 2 by G1-3 Andy Chen
+```
+def array_rfind(a):
+    for i in range(len(a)-1,-1,-1):
+        if a[i]==0:
+            return i
+def back_to_front(a):
+    array1=[]
+    array1.append(a[-1])
+    for i in range(len(a)-1):
+        array1.append(a[i])
+    return array1
+
+output=0
+n=int(input())
+warehouse=[]
+for i in range(n):
+    warehouse.append(int(input()))
+count=0
+while 0 in warehouse:
+    k=array_rfind(warehouse)
+    K=array_rfind(warehouse)
+    length=0
+    while True:
+        if warehouse[k]!=0:
+            warehouse[K]+=1
+            warehouse[k]-=1
+            output+=length**2
+            break
+        else:
+            length+=1
+            k-=1
+            if k<0:
+                k=len(warehouse)-1
+    warehouse=back_to_front(warehouse)
+print(output)
 ```
 
