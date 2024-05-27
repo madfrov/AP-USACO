@@ -148,4 +148,27 @@ for i in range(100):
             A = capA
 print(A,B,C)
 ```
+```
+#include <stdio.h>
+int c[4], m[4];
+void move(int x, int y) {
+    if (m[y] - c[y] >= c[x]) {
+            c[y] += c[x];
+            c[x] = 0;
+          } else {
+            c[x] -= m[y] - c[y];
+            c[y] = m[y];
+        }
+}
+int main() {
+    scanf("%d%d%d%d%d%d", &m[1], &c[1], &m[2], &c[2], &m[3], &c[3]);
+    for (int i = 1; i <= 33; ++ i) {
+        move(1, 2);
+        move(2, 3);
+        move(3, 1);
+    }
+    move(1, 2);
+    printf("%d\n%d\n%d", c[1], c[2], c[3]);
+}
 
+```
