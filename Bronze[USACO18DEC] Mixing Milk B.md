@@ -113,5 +113,39 @@ for i in range(100):
 print(t1[1],t2[1],t3[1])
 
 ```
-
+Answers 3 by G1-2 Sally Fu
+```
+capA,A = input().split()
+capB,B = input().split()
+capC,C = input().split()
+capA=int(capA)
+capB=int(capB)
+capC=int(capC)
+A =int(A)
+B =int(B)
+C =int(C)
+for i in range(100):
+    if i%3==0:
+        if (A+B) <=capB:
+            B+=A
+            A=0
+        elif (A+B) >capB:
+            A = (A+B)-capB
+            B = capB
+    if i%3==1:
+        if (B+C) <=capC:
+            C+=B
+            B=0
+        elif (B+C) >capC:
+            B = (B+C)-capC
+            C = capC
+    if i%3==2:
+        if (A+C) <=capA:
+            A+=C
+            C=0
+        elif (C+A) >capA:
+            C = (C+A)-capA
+            A = capA
+print(A,B,C)
+```
 
