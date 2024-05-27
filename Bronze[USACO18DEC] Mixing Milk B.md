@@ -74,6 +74,47 @@ print(m[3])
 ```
 Answers 2 by G2-5 Kelly
 ```
+t1=input().split()
+t2=input().split()
+t3=input().split()
+
+
+
+
+for i in range(100):
+
+    if i%3==0:
+        cb=int(t2[0])
+        cbi=int(t2[1])
+        cai=int(t1[1])
+        mi=min(cb-cbi,cai)
+        mb=cbi+mi
+        ma=cai-mi
+        t2[1]=mb
+        t1[1]=ma
+
+    elif i%3==1:#2-3
+        cb = int(t3[0])
+        cbi = int(t3[1])
+        cai = int(t2[1])
+        mi = min(cb - cbi, cai)
+        mb = cbi + mi
+        ma = cai - mi
+        t2[1] = ma
+        t3[1] = mb
+
+    elif i%3==2:
+        cb = int(t1[0])
+        cbi = int(t1[1])
+        cai = int(t3[1])
+        mi = min(cb - cbi, cai)
+        mb = cbi + mi
+        ma = cai - mi
+        t3[1] = ma
+        t1[1] = mb
+
+
+print(t1[1],t2[1],t3[1])
 
 ```
 
