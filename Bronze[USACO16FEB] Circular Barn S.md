@@ -45,36 +45,43 @@ FJ 决定采用这样的方法来解决这个问题：让某些奶牛**顺时针
 ```
 ## Answers in Python
 ```
-n = int(input())
-a = []
-cnt = 0
-maxx = -float('inf')
-p = 0
-ans = 0
+n = int(input())  # 读取房间数量
+a = []            # 存放每头奶牛所在房间编号的列表
+cnt = 0           # 当前房间编号
+maxx = -float('inf')  # 存放差值数组 b 的最大值
+p = 0             # 存放差值数组 b 的最大值对应的索引
+ans = 0           # 最后输出的最小能量
 
+# 构建奶牛所在房间的列表 a
 for _ in range(n):
-    x = int(input())
+    x = int(input())  # 读取当前房间的奶牛数量
     while x:
-        a.append(cnt)
+        a.append(cnt)  # 将当前房间编号添加到列表中
         x -= 1
     cnt += 1
 
+# 构建差值数组 b
 b = [a[i] - i for i in range(n)]
 
+# 找出差值数组 b 中的最大值及其对应的索引
 for i in range(n):
     if b[i] > maxx:
         maxx = b[i]
         p = i
 
+# 根据最大值位置 p 构建目标位置数组 c
 c = [0] * n
 c[p] = a[p]
 
+# 从 p 向左构建目标位置数组
 for i in range(p-1, -1, -1):
     c[i] = (c[i+1] - 1) % n
 
+# 从 p 向右构建目标位置数组
 for i in range(p+1, n):
     c[i] = (c[i-1] + 1) % n
 
+# 计算总能量
 for i in range(n):
     if c[i] < a[i]:
         c[i] += n
