@@ -1,2 +1,2 @@
 # AP-USACO
-### This course is for BGY top students in AP program
+### This course is only for BGY top students in AP program
