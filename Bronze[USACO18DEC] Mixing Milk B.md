@@ -72,15 +72,11 @@ print(m[1])
 print(m[2])
 print(m[3])
 ```
-Answers 2 by G2-5 Kelly
+Answers 2 by G2-5 Kelly Chen
 ```
 t1=input().split()
 t2=input().split()
 t3=input().split()
-
-
-
-
 for i in range(100):
 
     if i%3==0:
