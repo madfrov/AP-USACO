@@ -148,6 +148,7 @@ for i in range(100):
             A = capA
 print(A,B,C)
 ```
+Answer by G2-5 Matthew Xie
 ```
 #include <stdio.h>
 int c[4], m[4];
