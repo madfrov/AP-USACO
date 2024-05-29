@@ -173,3 +173,23 @@ int main() {
 }
 
 ```
+Answer by G2-5 Justin Lee
+```
+milk_1=[int(j) for j in input().split()]#capacity= milk_1[0] volumn= milk_1[1]
+milk_2=[int(j) for j in input().split()]
+milk_3=[int(j) for j in input().split()]
+dict_milk={
+     1:[milk_1[0],milk_1[1]]
+    ,2:[milk_2[0],milk_2[1]]
+    ,0:[milk_3[0],milk_3[1]]}
+for i in range(1,101):
+    if dict_milk[i%3][1]+dict_milk[(i+1)%3][1]<=dict_milk[(i+1)%3][0]:
+        dict_milk[(i+1)%3][1]=dict_milk[i % 3][1] + dict_milk[(i+1)%3][1]
+        dict_milk[i % 3][1]=0
+    else:
+        rest_c=  dict_milk[(i % 3) % 3][1]-dict_milk[(i + 1) % 3][0]
+        dict_milk[i%3][1]=rest_c
+        dict_milk[(i+1)%3][1]=dict_milk[(i+1)%3][0]
+print('the first bucket : %d L' %dict_milk[1][1])
+print('the second bucket : %d L' %dict_milk[2][1])
+print('the third bucket : %d L' %dict_milk[0][1])
