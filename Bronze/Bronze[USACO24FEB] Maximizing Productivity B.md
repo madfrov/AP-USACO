@@ -77,3 +77,32 @@ for i in range(q):
     else:
         print("NO")
 ```
+```
+#include <stdio.h>
+int n, q, c[200001], t[200001], sum;
+int s, v;
+int main () {
+    scanf("%d %d", &n, &q);
+    for (int i = 1;i <= n; ++ i) {
+        scanf("%d", &c[i]);
+    }
+    for (int i = 1;i <= n; ++ i) {
+        scanf("%d", &t[i]);
+    }
+    while (q --) {
+        scanf("%d %d", &s, &v);
+        sum = 0;
+        for (int i = 1; i <= n; ++ i) {
+            if (t[i] + s < c[i]) {
+                sum ++;
+            }
+        }
+        if (sum >= v) {
+            printf("YES\n");
+        } else {
+            printf("NO\n");
+        }
+    }
+    
+}
+```
