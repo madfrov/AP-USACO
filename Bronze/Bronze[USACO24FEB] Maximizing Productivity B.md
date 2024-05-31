@@ -147,3 +147,24 @@ for _ in range(Q):
     else:  
         print("NO")
 ```
+Answers by James Liu
+```
+N=int(input())
+Q=int(input())
+c=list(map(int,input().split()))
+g=list(map(int,input().split()))
+V=list(map(int,input().split()))
+S=list(map(int,input().split()))
+a=[]
+for b in range(N):
+    a.append(c[b]-g[b])
+for b1 in range(Q):
+    sum=0
+    for b2 in range(Q):
+        if a[b2]-S[b1]>0:
+            sum+=1
+    if sum>=V[b1]:
+        print('yes')
+    else:
+        print('no')
+```
