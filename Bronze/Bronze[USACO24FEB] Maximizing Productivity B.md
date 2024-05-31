@@ -245,3 +245,18 @@ public class P5_30 {
 }
 
 ```
+```
+n,q=map(int,input('pls input').split())
+c=list(map(int,input().split()))
+t=list(map(int,input().split()))
+late_time=[c[i]-t[i] for i in range(n)]
+late_time.sort(reverse=True)
+print(late_time)
+#上面都没问题 
+for i in range(len(late_time)):
+    ge,up=map(int,input('pls input').split())#放下来
+    if up<late_time[ge-1]:#改为ge-1
+        print('yes') 
+    else:
+        print('no')
+```
