@@ -77,7 +77,7 @@ for i in range(q):
     else:
         print("NO")
 ```
-Answer by Matthew Xie
+Answer by Matthew Xie in C++
 ```
 #include <stdio.h>
 int n, q, c[200001], t[200001], sum;
@@ -167,4 +167,81 @@ for b1 in range(Q):
         print('yes')
     else:
         print('no')
+```
+Answer by Vicky Zhang in Java
+```
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class P5_30 {
+
+	public static void tongji() {
+		
+		Scanner im=new Scanner(System.in);
+		int numoffarm=im.nextInt();  //ln1
+		int numofivi=im.nextInt();
+		
+		List<Integer> closetime=new ArrayList<>();
+		for(int i=0;i<numoffarm;i++) {  //ln2
+			closetime.add(im.nextInt());
+			
+		}
+		
+		List<Integer> taketime=new ArrayList<>();
+		for(int i=0;i<numoffarm;i++) {   //ln3
+			taketime.add(im.nextInt());
+			
+		}
+		
+		List<Integer> timebed=new ArrayList<>();  //隐藏
+		for(int i=0;i<numoffarm;i++) {
+			timebed.add(closetime.get(i)-taketime.get(i));
+			
+		}
+		
+		
+		List<String> ans=new ArrayList<>();
+		for(int i=0;i<numofivi;i++) {
+			int count=0;
+			int timere=im.nextInt();
+			int timegetup=im.nextInt();
+			
+			for(int x:timebed) {
+				if(x>timegetup) {
+					count++;
+				}	
+			}
+			
+			if(count>=timere) {
+				ans.add("YES");
+			}else {
+				ans.add("NO");
+			}
+		}
+		
+		for(String x:ans) {
+			System.out.println(x);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		tongji();
+		
+		
+		
+	}
+
+}
+
 ```
