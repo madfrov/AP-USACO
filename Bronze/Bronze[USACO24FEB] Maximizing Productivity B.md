@@ -245,4 +245,35 @@ public class P5_30 {
 }
 
 ```
-
+Answer by Sally Fu
+```
+num_farm,num_q = map(int, input().split())
+c=list(map(int, input().split()))
+t=list(map(int, input().split()))
+c_n=[]
+for i in range(num_farm):
+    c_n.append(c[i]-t[i])
+c_n.sort(reverse=True)
+for i in range(num_q):
+    V,S=map(int, input().split())
+    if S<=c_n[V-1]:
+        print("YES")
+    else:
+        print("NO")
+```
+Answer by David Ao
+```
+n,q=map(int,input('pls input').split())
+c=list(map(int,input().split()))
+t=list(map(int,input().split()))
+late_time=[c[i]-t[i] for i in range(n)]
+late_time.sort(reverse=True)
+print(late_time)
+#上面都没问题 
+for i in range(len(late_time)):
+    ge,up=map(int,input('pls input').split())#放下来
+    if up<late_time[ge-1]:#改为ge-1
+        print('yes') 
+    else:
+        print('no')
+```
