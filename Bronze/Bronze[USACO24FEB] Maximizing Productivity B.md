@@ -113,7 +113,7 @@ close_time=[int(i) for i in input().split()]
 open_time=[int(i) for i in input().split()]
 difference=sorted([int(close_time[i]-open_time[i])for i in range(len(close_time))],reverse=True)
 y_n=''
-for i in range(5):
+for i in range(Q):
     S,V=[int(i)for i in input().split()]
     if difference[S-1]>V:
         y_n+=('YES\n')
