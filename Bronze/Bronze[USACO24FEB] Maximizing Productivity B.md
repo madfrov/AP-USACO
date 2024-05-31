@@ -77,6 +77,7 @@ for i in range(q):
     else:
         print("NO")
 ```
+Answer by Matthew Xie
 ```
 #include <stdio.h>
 int n, q, c[200001], t[200001], sum;
@@ -106,7 +107,7 @@ int main () {
     
 }
 ```
-answer made by Justin.Lee
+Answer made by Justin.Lee
 ```
 N,Q=[int(i) for i in input().split()]
 close_time=[int(i) for i in input().split()]
@@ -120,3 +121,29 @@ for i in range(Q):
     else:
         y_n+=('NO\n')
 print(y_n)
+
+```
+Answer by IKun Chen
+```
+N, Q = map(int, input().split())  
+c = list(map(int, input().split()))  
+t = list(map(int, input().split()))  
+  
+windows = [(c[i] - t[i], i) for i in range(N)]   
+  
+windows.sort(reverse=True)  
+  
+for _ in range(Q):  
+    V, S = map(int, input().split())  
+    count = 0   
+    total_time = 0  
+    for window, _ in windows:  
+        if total_time + window <= S:  
+            total_time += window  
+            count += 1  
+            if count >= V:  
+                print("YES")  
+                break  
+    else:  
+        print("NO")
+```
