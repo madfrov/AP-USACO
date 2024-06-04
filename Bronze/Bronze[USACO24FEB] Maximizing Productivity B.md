@@ -277,4 +277,26 @@ for i in range(len(late_time)):
     else:
         print('no')
 ```
-sdfsg
+Answer by Kelly Chen
+```
+n,q=list(map(int,input().split()))
+fj=list(map(int,input().split()))
+Bessie=list(map(int,input().split()))
+late=[fj[i]-Bessie[i]for i in range(n)]
+
+late.sort(reverse=True)
+
+
+all=[]#创个列表储存v,s的结果
+for i in range(q):
+    Q=list(map(int,input().split()))
+    all.append(Q)
+
+for i in range(q):
+
+    if all[i][1]<late[all[i][0]-1]:
+
+            print(("YES"))
+    else:
+        print("NO")
+```
