@@ -300,3 +300,5 @@ for i in range(q):
     else:
         print("NO")
 ```
+
+Answer by today
