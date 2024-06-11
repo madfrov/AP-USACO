@@ -74,3 +74,41 @@ Bessie 经过的路径为 $4\to 5\to 3\to 1\to 6$，下一次弹跳将会使她�
  - 测试点 $3-5$：N <= 100。
  - 测试点 $6-10$：N <= 1000。
  - 测试点 $11-20$：没有额外限制。
+
+```
+def cannonball_jump(num_positions, start_position, targets):
+    energy = 1
+    direction = 1
+    broken_targets = 0
+    has_broken = [False] * (num_positions + 1)
+    last_energy = [0] * (num_positions + 1)
+    last_direction = [0] * (num_positions + 1)
+
+    current_position = start_position
+
+    while 1 <= current_position <= num_positions:
+        target_type, value = targets[current_position - 1]
+
+        if target_type == 1:  # 炮击目标
+            if not has_broken[current_position] and energy >= value:
+                has_broken[current_position] = True
+                last_energy[current_position] = energy
+                last_direction[current_position] = direction
+                broken_targets += 1
+            elif last_energy[current_position] == energy and last_direction[current_position] == direction:
+                break
+        else:  # 跳板
+            energy += value
+            direction *= -1
+
+        current_position += energy * direction
+
+    return broken_targets
+
+# 读取输入
+num_positions, start_position = map(int, input().split())
+targets = [tuple(map(int, input().split())) for _ in range(num_positions)]
+
+# 调用函数并输出结果
+print(cannonball_jump(num_positions, start_position, targets))
+```
