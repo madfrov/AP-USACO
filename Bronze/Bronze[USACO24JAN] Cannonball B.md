@@ -112,3 +112,38 @@ targets = [tuple(map(int, input().split())) for _ in range(num_positions)]
 # 调用函数并输出结果
 print(cannonball_jump(num_positions, start_position, targets))
 ```
+```
+# 读取输入
+n, s = map(int, input().split())
+
+# 初始化变量
+energy = 1
+direction = 1
+broken_targets = 0
+visited = [False] * (n + 1)
+targets = [tuple(map(int, input().split())) for _ in range(n)]
+
+steps = 0
+max_steps = 1145141
+
+# 主要逻辑
+while steps < max_steps:
+    steps += 1
+    target_type, value = targets[s - 1]
+
+    if target_type == 1:  # 炮击目标
+        if energy >= value and not visited[s]:
+            broken_targets += 1
+            visited[s] = True
+    else:  # 跳板
+        direction = -direction  # 反转方向
+        energy += value
+
+    s += direction * energy
+    
+    if s > n or s < 1:
+        break  # 跳出数轴时退出
+
+# 输出结果
+print(broken_targets)
+```
