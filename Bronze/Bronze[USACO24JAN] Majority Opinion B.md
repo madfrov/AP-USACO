@@ -85,3 +85,27 @@ Farmer John 想知道哪些类型的干草有可能变为同时受到所有奶�
 - 测试点 $3-4$：N <= 50。
 - 测试点 $5-6$：对于所有的 $1\le i\le N−1$，有 $h_i\le h_i+1$。
 - 测试点 $7-15$：没有额外限制。
+
+```
+T = int(input())
+for _ in range(T):
+    n = int(input())
+    a = list(map(int, input().split()))
+    
+    in_ans = [False] * (2 * 10**5 + 5)
+    last = [0] * (2 * 10**5 + 5)
+    ans = []
+
+    for i in range(n):
+        if last[a[i]] != 0:
+            if i + 1 - last[a[i]] < 3 and not in_ans[a[i]]:
+                in_ans[a[i]] = True
+                ans.append(a[i])
+        last[a[i]] = i + 1
+
+    ans.sort()
+    if not ans:
+        print(-1)
+    else:
+        print(" ".join(map(str, ans)))
+```
