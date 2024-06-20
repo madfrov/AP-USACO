@@ -147,3 +147,53 @@ while steps < max_steps:
 # 输出结果
 print(broken_targets)
 ```
+Answer by Ryan Wu
+```
+# 规则
+# 0 = 跳板
+# 1 = 目标
+
+def listIntAAndB(a, b):
+    c, d = input().split()
+    a.append(int(c))
+    b.append(int(d))
+    return a, b
+
+# input
+N, S = input().split()
+N = int(N)
+S = int(S)
+q = []
+v = []
+for i in range(N):
+    q, v = listIntAAndB(q, v)
+# print("N", N, "S", S, "q", q, "v", v)
+
+num = 0
+k = 1
+pos = S
+while 1 <= pos <= N:
+    if q[pos - 1] == 0: # 跳板
+        if k >= 0:
+            k = -(k + v[pos - 1])
+            pos += k
+            # print(0.1, pos, k, num)
+        elif k < 0:
+            k = -(k - v[pos - 1])
+            pos += k
+            # print(0.2, pos, k, num)
+    elif q[pos - 1] == 1: # 目标
+        if (abs(k) >= v[pos - 1]) and (v[pos - 1] != 0): # 能击破
+            v[pos - 1] = 0
+            pos += k
+            num += 1
+            # print(1, pos, k, num)
+        elif (abs(k) < v[pos - 1]) and (v[pos - 1] != 0): # 不能击破
+            pos += k
+            print(2, pos, k, num)
+        elif v[pos - 1] == 0: # 跳板已击破
+            pos += k
+            # print(3, pos, k, num)
+
+print(num)
+```
