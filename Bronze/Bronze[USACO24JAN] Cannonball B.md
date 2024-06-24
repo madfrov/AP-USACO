@@ -197,3 +197,70 @@ while 1 <= pos <= N:
 
 print(num)
 ```
+Answer by Sally
+```
+N,S=input().split()
+N=int(N)
+S=int(S)
+position=1 #1
+energy=1
+t=0#弹
+p=1#炮击目标
+c=1#顺时针
+a=-1#逆时针
+num_list=[]
+for i in range(N):
+    num_list.append(list(map(int,input().split())))
+num_broken=0
+now=S
+visited=[False]*N
+while 1 <= now <= N:#2
+    op,energy_list=num_list[now-1]
+    now_index= now-1
+    if op==t: # 跳跳版
+        energy += energy_list
+        position*=-1 #
+        now+=energy*position
+    elif op==p:#炮击目标
+        if energy_list <= energy and not visited[now_index]:#如果小于能量就被击破
+            num_broken+=1 #击破是不是也要继续走
+            visited[now_index] =True
+        now+=position*energy
+print(num_broken)
+```
+Answer by Ikun
+```
+def count_destroyed_targets(N,S,position):
+    visited=set()
+    energy=1
+    destroyed_tragets=0
+    direction=1
+    current_pos=S
+    
+    while 1<= current_pos <=N :
+        if (current_pos, energy, direction) in visited:  
+            break  
+        visited.add((current_pos, energy, direction))  
+        q, v = position[current_pos - 1]
+       
+        if q==1 and energy>=v:
+            destroyed_tragets+=1
+        
+        if q==0:
+            energy+=v
+            direction*=-1
+        next_pos=current_pos+direction*energy 
+        
+        if next_pos<1 or next_pos>N:
+            break
+        current_pos=next_pos
+    
+    return destroyed_tragets
+
+N,S=(map(int,input().split()))
+position=[]
+for _ in range(N):  
+    q, v =map(int,input().split()) 
+    position.append((q, v))  
+print(count_destroyed_targets(N, S, position))
+```
