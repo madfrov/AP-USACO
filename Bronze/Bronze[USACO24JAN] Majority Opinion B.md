@@ -109,3 +109,30 @@ for _ in range(T):
     else:
         print(" ".join(map(str, ans)))
 ```
+```
+# 读取测试用例数量
+T = int(input())
+
+for _ in range(T):
+    # 读取奶牛数量和她们喜欢的干草类型
+    n = int(input())
+    hay = list(map(int, input().split()))
+    
+    last_position = {}  # 记录每种干草最后出现的位置
+    possible_types = set()  # 可能的解
+
+    # 遍历每头奶牛喜欢的干草类型
+    for i, hay_type in enumerate(hay):
+        if hay_type in last_position:
+            # 如果这种干草之前出现过，检查间隔
+            if i - last_position[hay_type] < 3:
+                possible_types.add(hay_type)
+        last_position[hay_type] = i
+
+    # 准备输出结果
+    if possible_types:
+        result = sorted(possible_types)
+        print(*result)
+    else:
+        print(-1)
+```
