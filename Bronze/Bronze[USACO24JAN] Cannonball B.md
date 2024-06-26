@@ -197,7 +197,7 @@ while 1 <= pos <= N:
 
 print(num)
 ```
-Answer by Sally
+Answer by Sally Fu
 ```
 N,S=input().split()
 N=int(N)
