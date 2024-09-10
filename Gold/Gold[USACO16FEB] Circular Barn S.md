@@ -2,7 +2,7 @@
 
 ## 题目背景
 
-*本题与 [金组同名题目](/problem/P6170) 在题意上一致，唯一的差别是数据范围。*
+(https://usaco.org/index.php?page=viewproblem2&cpid=621)
 
 ## 题目描述
 
