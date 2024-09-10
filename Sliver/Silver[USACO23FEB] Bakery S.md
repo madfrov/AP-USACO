@@ -1,5 +1,5 @@
 # [USACO23FEB] Bakery S
-https://usaco.org/index.php?page=viewproblem2&cpid=1302
+原题link: https://usaco.org/index.php?page=viewproblem2&cpid=1302
 
 ## 题目描述
 
