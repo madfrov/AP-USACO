@@ -246,7 +246,7 @@ signed main()
             int mid = (l+r)>>1;
             if (check(mid)) {
                 ans = mid;
-                r = mid-1;  // 如果mid可以满足要求，那就减少的再少一点（题目要求求最小值）
+                r = mid-1;  // 如果mid可以满足要求，那就减少的再少一点
             } else {
                 l = mid+1;  // 否则，那就减少的再多点
             }
