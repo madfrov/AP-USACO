@@ -1,5 +1,7 @@
 # [USACO24JAN] Majority Opinion B
 
+https://usaco.org/index.php?page=viewproblem2&cpid=1371
+
 ## 题目描述
 
 Farmer John 有一项重要的任务——弄清楚要为他的奶牛们购买什么类型的干草。
