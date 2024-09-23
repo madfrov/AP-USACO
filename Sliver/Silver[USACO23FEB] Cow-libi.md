@@ -53,4 +53,59 @@
 
 ![img1](https://github.com/madfrov/AP-USACO/blob/main/Sliver/Scoreing1.jpg)
 
-
+Ans in C++
+```
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long  // 因为题目中计算后会超int，所以全部修改为long long
+int G, n, ans;
+struct node {
+    int x, y, t;
+    bool operator < (node other) {  // 后面用到sor排序，重载"<"
+        return t < other.t;
+    }
+}g[100005];
+signed main()  // 前面有define，所以这里改为signed
+{
+    cin >> G >> n;  // 输入G和n
+    for (int i=1; i<=G; i++) {  // 输入G个吃草的点
+        cin >> g[i].x >> g[i].y >> g[i].t;
+    }
+    sort(g+1, g+G+1);  // 所有的点按照从小到大排序
+    int cowx, cowy, cowt;
+    for (int i=1; i<=n; i++) {  // 输入每只奶牛的证词
+        cin >> cowx >> cowy >> cowt;
+        int res=0;  // 定义二分答案
+        if (cowt<g[1].t) {  // 如果cowt时刻小于g[1].t
+            if ((g[1].x-cowx)*(g[1].x-cowx)+(g[1].y-cowy)*(g[1].y-cowy) > (g[1].t-cowt)*(g[1].t-cowt)) {  // 如果它没有足够的时间到达g[1]
+                ans++;  // 就是无辜的
+            }
+        } else if (cowt>g[G].t) {  // 如果cowt的时刻大于g[G].t
+            if ((g[G].x-cowx)*(g[G].x-cowx)+(g[G].y-cowy)*(g[G].y-cowy) > (g[G].t-cowt)*(g[G].t-cowt)) {  // 如果它没有足够的时间到达g[G]
+                ans++;  // 也是无辜的
+            }
+        } else {
+            int l = 1, r = G;
+            while (l<=r) {  // 二分答案模板
+                int mid = (l+r)/2;
+                if (g[mid].t<cowt) {  // g[mid].t小于cowt时（其他模板代码固定，可以开调试观察这里的结果）
+                    res = mid;  // 就更新res
+                    l = mid+1;  // 然后增加l，找到最大的l
+                } else {  // 否则
+                    r = mid-1;  // 减少r
+                }
+            }
+            bool innocent = false;  // 定义标记位
+            if ((g[res].x-cowx)*(g[res].x-cowx) + (g[res].y-cowy)*(g[res].y-cowy) > (g[res].t-cowt)*(g[res].t-cowt)) {  // 如果无法到res这个点
+                    innocent = true;  // 修改标记位
+            }
+            if ((g[res+1].x-cowx)*(g[res+1].x-cowx) + (g[res+1].y-cowy)*(g[res+1].y-cowy) > (g[res+1].t-cowt)*(g[res+1].t-cowt)) {  // 如果无法到res+1这个点
+                innocent = true;  // 修改标记位
+            }
+            ans += innocent;  // 只要有一个吃草点无法到达，就是无辜的
+        }
+    }
+    cout << ans << endl;  // 输出无辜的奶牛数量
+    return 0;
+}
+```
