@@ -51,6 +51,6 @@
 
 最后，第四头奶牛是无辜的，因为它不可能及时从不在场证明赶到最后的放牧地。
 
-![image-20240923155807997](/Users/huangzizhuang/Library/Application Support/typora-user-images/image-20240923155807997.png)
+![image-20240923155807997]([/Users/huangzizhuang/Library/Application Support/typora-user-images/image-20240923155807997.png](https://github.com/madfrov/AP-USACO/blob/main/Sliver/Scoreing1.jpg))
 
 s
