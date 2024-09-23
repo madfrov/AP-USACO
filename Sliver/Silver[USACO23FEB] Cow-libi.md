@@ -109,3 +109,59 @@ signed main()  // 前面有define，所以这里改为signed
     return 0;
 }
 ```
+Ans 2 in c++
+```
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+
+int n,m,cnt;
+
+struct nod{
+	int x,y,t;
+}nn[100010],mm[100010];
+
+//两分查找，返回右端点 
+int two_search(int t){
+	int head=0,tail=n+1;
+	while(head + 1 < tail){
+		int mid=(head+tail)/2;
+		if(nn[mid].t>t)tail=mid;
+		else head = mid;
+	}
+	return tail;
+}
+
+//返回true表示不能作案 
+bool ispos(int pos,int i){
+	if((nn[pos].t-mm[i].t)*(nn[pos].t-mm[i].t)<(nn[pos].x-mm[i].x)*(nn[pos].x-mm[i].x)+(nn[pos].y-mm[i].y)*(nn[pos].y-mm[i].y))return true;
+	else return false;
+}
+//返回值为true是能作案 
+bool check(int pos,int i){
+	//检测pos, pos - 1
+	int pos1=pos-1,pos2=pos;
+	if (pos2 != n + 1 && ispos(pos2, i)) return false;
+	if (pos1 != 0 && ispos(pos1, i)) return false;
+	return true;
+}
+
+bool cmp(nod q,nod p){
+	return q.t<p.t;
+}
+
+signed main(){
+	scanf("%lld%lld",&n,&m);
+	for(int i=1;i<=n;++i)
+		scanf("%lld%lld%lld",&nn[i].x,&nn[i].y,&nn[i].t);
+	for(int i=1;i<=m;++i)
+		scanf("%lld%lld%lld",&mm[i].x,&mm[i].y,&mm[i].t);
+	sort(nn+1,nn+1+n,cmp);
+	for(int i=1;i<=m;++i){
+		int pos=two_search(mm[i].t);
+		if(!check(pos,i))++cnt;
+	}
+	cout<<cnt<<endl;
+	return 0;
+}
+```
