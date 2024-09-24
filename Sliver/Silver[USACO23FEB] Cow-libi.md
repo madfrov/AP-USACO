@@ -55,6 +55,60 @@ Finally, the fourth cow is innocent because it's impossible to make it from her 
 
 ![img1](https://github.com/madfrov/AP-USACO/blob/main/Sliver/Scoreing1.jpg)
 
+Ans in Python
+```
+def main():
+    G, n = map(int, input().split())
+    
+    # 存储吃草点的信息
+    grass_points = []
+    for _ in range(G):
+        x, y, t = map(int, input().split())
+        grass_points.append((x, y, t))
+    
+    # 按时间排序吃草点
+    grass_points.sort(key=lambda p: p[2])
+    
+    ans = 0
+    for _ in range(n):
+        cowx, cowy, cowt = map(int, input().split())
+        
+        # 处理特殊情况
+        if cowt < grass_points[0][2]:
+            if (grass_points[0][0] - cowx)**2 + (grass_points[0][1] - cowy)**2 > (grass_points[0][2] - cowt)**2:
+                ans += 1
+            continue
+        
+        if cowt > grass_points[-1][2]:
+            if (grass_points[-1][0] - cowx)**2 + (grass_points[-1][1] - cowy)**2 > (grass_points[-1][2] - cowt)**2:
+                ans += 1
+            continue
+        
+        # 二分查找
+        left, right = 0, G - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if grass_points[mid][2] < cowt:
+                res = mid
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        # 检查是否可以到达相邻的两个点
+        innocent = False
+        for i in [res, res + 1]:
+            if i < G and (grass_points[i][0] - cowx)**2 + (grass_points[i][1] - cowy)**2 > (grass_points[i][2] - cowt)**2:
+                innocent = True
+                break
+        
+        if innocent:
+            ans += 1
+    
+    print(ans)
+
+if __name__ == "__main__":
+    main()
+```
 Ans in C++
 ```
 #include <bits/stdc++.h>
