@@ -257,3 +257,87 @@ signed main()
     return 0;
 }
 ```
+Answer by AP G3-5 谢家墉
+```
+#include <cstdio>
+#include <algorithm>
+int t, n, tc, tm, mid, l, r, ans;
+int a[101], b[101], c[101];
+bool fl;
+using namespace std;
+bool check (int s, int x, int y) {
+    
+    fl = true;
+    if (x > tc) {
+        
+        y += (x - tc);x = tc;
+    }
+    if (y > tm) {
+        return false;
+    }if (x < 0 or x > tc or y < 0 or y > tm) return false;
+    for (int i = 1; i <= n; ++ i) {
+        if (a[i] * (tc - x) + b[i] * (tm - y) >= c[i]) {
+            fl = false;
+            break;
+        }
+
+    }
+    if (!fl) return check(s, x - 1, y + 1);
+    else return true;
+}
+int main () {
+    scanf ("%d", &t);
+    while (t --) {
+        scanf("%d %d %d", &n, &tc, &tm);
+        for (int i = 1; i <= n; ++ i) {
+            scanf("%d %d %d", &a[i], &b[i], &c[i]);
+        }
+        l = 0; r = tc + tm;
+        ans = 1e9;
+        while (l <= r) {
+            mid = (l + r) / 2;
+            if (mid > tc + tm) {
+                r = mid - 1;
+                continue;
+            }
+            if (mid == tc + tm) {
+                ans = min(ans, mid);
+                r = mid - 1;
+                continue;
+            }
+            if (check(mid, mid, 0)) {
+                ans = min(ans, mid);
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+        }
+        printf("%d\n", ans);
+    }
+}
+```
+Answer by MYP G2-1 李梓兮
+```
+t = int(input())
+for i in range(t):
+    n, tc, tm = map(int, input().split())
+    friends = []
+    for i in range(n):
+        ai, bi, ci = map(int, input().split())
+        friends.append((ai, bi, ci))
+    result = 1000000
+
+    for j in range(1, tc + 1):
+        for k in range(1, tm + 1):
+            flag = True
+
+            for ai, bi, ci in friends:
+                if ai * j + bi * k > ci:
+                    flag = False
+                    break
+            if flag:
+                result = min(result, (tc - j) + (tm - k))
+
+    print(result)
+
+```
