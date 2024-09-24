@@ -43,13 +43,15 @@
  第二个在（50,0）
  时间为 200
 
-第一头牛的不在场证明并不能证明它的清白。它有足够的时间到达第一次放牧地点。
+There were two grazings; the first at (0,0) at time 100 and the second at (50,0) at time 200
 
-第二头牛的不在场证明确实证明了它的清白。它没有靠近任何一个牧场。
+The first cow's alibi does not prove her innocence. She has just enough time to arrive at the first grazing.
 
-不幸的是，第三头奶牛在犯罪现场也不能证明自己无罪。
+The second cow's alibi does prove her innocence. She is nowhere near any of the grazings.
 
-最后，第四头奶牛是无辜的，因为它不可能及时从不在场证明赶到最后的放牧地。
+Unfortunately for the third cow, being at the scene of the crime does not prove innocence.
+
+Finally, the fourth cow is innocent because it's impossible to make it from her alibi to the final grazing in time.
 
 ![img1](https://github.com/madfrov/AP-USACO/blob/main/Sliver/Scoreing1.jpg)
 
