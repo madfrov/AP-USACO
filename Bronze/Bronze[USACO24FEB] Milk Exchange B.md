@@ -84,3 +84,107 @@ RRRLRRLLR
 - 测试点 4-8：N,M <= 1000。
 - 测试点 9-16：没有额外限制。
 
+<<<<<<< HEAD
+=======
+a = []
+sum = 0
+
+for i in range(n):
+    a.append(int(input()))
+    sum += a[i]
+
+ans = 0
+
+for i in range(n+1):
+    if s[i] == 'R' and s[i+1] == 'L':
+        l = 0
+        r = 0
+        lpos = i - 1 if i - 1 >= 0 else i - 1 + n
+        rpos = i + 2 if i + 2 <= n else i + 2 - n
+        while s[lpos] == 'R':
+            l += a[lpos]
+            lpos -= 1
+            if lpos < 0:
+                lpos += n
+        while s[rpos] == 'L':
+            r += a[rpos]
+            rpos += 1
+            if rpos > n:
+                rpos -= n
+        ans += min(m, l) + min(m, r)
+
+print(sum - ans)
+```
+Answer by Vicky Zhang in JAVA
+```
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class mikeexchange {
+
+	public static int milkexchange() {
+		Scanner im = new Scanner(System.in);
+
+		int numofcow = im.nextInt(); // 奶牛数量
+		int numofmin = im.nextInt(); // 分钟数
+
+		String LR = "";
+		LR += im.next(); // 形成LR字符串 RRRLRRLLR
+
+		List<Integer> vol = new ArrayList<>();
+		int total = 0;
+		for (int i = 0; i < numofcow; i++) {
+			int a = im.nextInt();
+			vol.add(a); // 形成容量列表 5 8 4 9 3 4 9 5 4
+			total += a;
+		}
+
+		if (numofcow < 3 || numofmin < 1) {
+			return total;
+		}
+
+		for (int i = 0; i < numofmin; i++) {
+			for (int n = 0; n < numofcow; n++) {
+
+				if (idenv(LR, n) && vol.get(n) != 0) {// RxL
+					vol.set(n, vol.get(n) - 1);
+				}
+				if (vol.get(n) == 0) {
+					vol.remove(n);
+					LR = LR.substring(0, n) + LR.substring(n + 1);
+				}
+				numofcow = vol.size();
+			}
+//			System.out.println(vol);
+
+		}
+		total = 0;
+		for (int x : vol) {
+			total += x;
+		}
+
+		return total;
+
+	}
+
+	public static boolean idenv(String ans, int index) { // 测试是否为L x R
+		int s = ans.length();
+		boolean a = (ans.substring((s + index - 1) % s, ((s + index - 1) % s) + 1).equals("L"));
+		boolean b = (ans.substring((s + index + 1) % s, ((s + index + 1) % s) + 1).equals("R"));
+		return a && b;
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		System.out.println(milkexchange());
+
+	}
+
+}
+
+```
+>>>>>>> 98baffefb78371d3306b70ab944dc9b29ddd3011

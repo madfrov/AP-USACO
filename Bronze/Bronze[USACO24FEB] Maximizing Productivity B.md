@@ -10,9 +10,9 @@ Bessie 有  Q（1<= Q<=2*10^5）个询问。对于每个询问，她会给你两
 
 输入的第一行包含 N 和 Q。
 
-第二行包含 c_1,c_2,c_3\ldots c_N（1<=c_i<=10^6）。
+第二行包含 c_1,c_2,c_3....c_N（1<=c_i<=10^6）。
 
-第三行包含 t_1,t_2,t_3\ldots t_N（1<=t_i<=10^6）。
+第三行包含 t_1,t_2,t_3....t_N（1<=t_i<=10^6）。
 
 以下 $Q$ 行，每行包含两个整数 V（1<=V<=N）和 S（1<=S<=10^6）。
 
@@ -66,6 +66,7 @@ NO
 
   ## 题目描述
 
+<<<<<<< HEAD
   Farmer John 有一项重要的任务——弄清楚要为他的奶牛们购买什么类型的干草。
 
   Farmer John 的 $N$ 头奶牛（$2\le N\le 10^5$）编号为 $1$ 到 $N$，每头奶牛喜欢恰好一种类型的干草 $h_i$（$1\le h_i\le N$）。他希望他的所有奶牛都喜欢同一种干草。
@@ -140,3 +141,237 @@ NO
   - 测试点 $3-4$：$N\le 50$。
   - 测试点 $5-6$：对于所有的 $1\le i\le N−1$，有 $h_i\le h_i+1$。
   - 测试点 $7-15$：没有额外限制。
+=======
+for i in range(q):
+    v, s = map(int, input().split())
+    if s < late[v-1]:
+        print("YES")
+    else:
+        print("NO")
+```
+Answer by Matthew Xie in C++
+```
+#include <stdio.h>
+int n, q, c[200001], t[200001], sum;
+int s, v;
+int main () {
+    scanf("%d %d", &n, &q);
+    for (int i = 1;i <= n; ++ i) {
+        scanf("%d", &c[i]);
+    }
+    for (int i = 1;i <= n; ++ i) {
+        scanf("%d", &t[i]);
+    }
+    while (q --) {
+        scanf("%d %d", &s, &v);
+        sum = 0;
+        for (int i = 1; i <= n; ++ i) {
+            if (t[i] + s < c[i]) {
+                sum ++;
+            }
+        }
+        if (sum >= v) {
+            printf("YES\n");
+        } else {
+            printf("NO\n");
+        }
+    }
+    
+}
+```
+Answer made by Justin.Lee
+```
+N,Q=[int(i) for i in input().split()]
+close_time=[int(i) for i in input().split()]
+open_time=[int(i) for i in input().split()]
+difference=sorted([int(close_time[i]-open_time[i])for i in range(len(close_time))],reverse=True)
+y_n=''
+for i in range(Q):
+    S,V=[int(i)for i in input().split()]
+    if difference[S-1]>V:
+        y_n+=('YES\n')
+    else:
+        y_n+=('NO\n')
+print(y_n)
+
+```
+Answer by IKun Chen
+```
+N, Q = map(int, input().split())  
+c = list(map(int, input().split()))  
+t = list(map(int, input().split()))  
+  
+windows = [(c[i] - t[i], i) for i in range(N)]   
+  
+windows.sort(reverse=True)  
+  
+for _ in range(Q):  
+    V, S = map(int, input().split())  
+    count = 0   
+    total_time = 0  
+    for window, _ in windows:  
+        if total_time + window <= S:  
+            total_time += window  
+            count += 1  
+            if count >= V:  
+                print("YES")  
+                break  
+    else:  
+        print("NO")
+```
+Answers by James Liu
+```
+N=int(input())
+Q=int(input())
+c=list(map(int,input().split()))
+g=list(map(int,input().split()))
+V=list(map(int,input().split()))
+S=list(map(int,input().split()))
+a=[]
+for b in range(N):
+    a.append(c[b]-g[b])
+for b1 in range(Q):
+    sum=0
+    for b2 in range(Q):
+        if a[b2]-S[b1]>0:
+            sum+=1
+    if sum>=V[b1]:
+        print('yes')
+    else:
+        print('no')
+```
+Answer by Vicky Zhang in Java
+```
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class P5_30 {
+
+	public static void tongji() {
+		
+		Scanner im=new Scanner(System.in);
+		int numoffarm=im.nextInt();  //ln1
+		int numofivi=im.nextInt();
+		
+		List<Integer> closetime=new ArrayList<>();
+		for(int i=0;i<numoffarm;i++) {  //ln2
+			closetime.add(im.nextInt());
+			
+		}
+		
+		List<Integer> taketime=new ArrayList<>();
+		for(int i=0;i<numoffarm;i++) {   //ln3
+			taketime.add(im.nextInt());
+			
+		}
+		
+		List<Integer> timebed=new ArrayList<>();  //隐藏
+		for(int i=0;i<numoffarm;i++) {
+			timebed.add(closetime.get(i)-taketime.get(i));
+			
+		}
+		
+		
+		List<String> ans=new ArrayList<>();
+		for(int i=0;i<numofivi;i++) {
+			int count=0;
+			int timere=im.nextInt();
+			int timegetup=im.nextInt();
+			
+			for(int x:timebed) {
+				if(x>timegetup) {
+					count++;
+				}	
+			}
+			
+			if(count>=timere) {
+				ans.add("YES");
+			}else {
+				ans.add("NO");
+			}
+		}
+		
+		for(String x:ans) {
+			System.out.println(x);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		tongji();
+		
+		
+		
+	}
+
+}
+
+```
+Answer by Sally Fu
+```
+num_farm,num_q = map(int, input().split())
+c=list(map(int, input().split()))
+t=list(map(int, input().split()))
+c_n=[]
+for i in range(num_farm):
+    c_n.append(c[i]-t[i])
+c_n.sort(reverse=True)
+for i in range(num_q):
+    V,S=map(int, input().split())
+    if S<=c_n[V-1]:
+        print("YES")
+    else:
+        print("NO")
+```
+Answer by David Ao
+```
+n,q=map(int,input('pls input').split())
+c=list(map(int,input().split()))
+t=list(map(int,input().split()))
+late_time=[c[i]-t[i] for i in range(n)]
+late_time.sort(reverse=True)
+print(late_time)
+#上面都没问题 
+for i in range(len(late_time)):
+    ge,up=map(int,input('pls input').split())#放下来
+    if up<late_time[ge-1]:#改为ge-1
+        print('yes') 
+    else:
+        print('no')
+```
+Answer by Kelly Chen
+```
+n,q=list(map(int,input().split()))
+fj=list(map(int,input().split()))
+Bessie=list(map(int,input().split()))
+late=[fj[i]-Bessie[i]for i in range(n)]
+
+late.sort(reverse=True)
+
+
+all=[]#创个列表储存v,s的结果
+for i in range(q):
+    Q=list(map(int,input().split()))
+    all.append(Q)
+
+for i in range(q):
+
+    if all[i][1]<late[all[i][0]-1]:
+
+            print(("YES"))
+    else:
+        print("NO")
+```
+
+Answer by today
+>>>>>>> 98baffefb78371d3306b70ab944dc9b29ddd3011

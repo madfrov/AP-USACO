@@ -28,5 +28,14 @@
 
 难度等级：需要有很高的编程基础，对算法有深入的了解。部分比赛问题最后的优化方案，可能不只一个，得出的答案也不只一个。
 
+对于分数设置，一般来说：
+
+Bronze 级别的满分通常是 1000 分。
+Silver 级别的满分通常是 1200 分。
+Gold 级别的满分通常是 1400 分。
+Platinum 级别的满分则是 USACO 中最高的，通常是 1600 分。
 
 ![](https://img-blog.csdnimg.cn/img_convert/b485bafd1d1a0bda0d00941d04ba24da.png)
+
+
+# 洛谷：https://www.luogu.com.cn/problem/list
