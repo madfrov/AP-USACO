@@ -52,3 +52,88 @@ DD 10
 ```
 
 在第一次翻转之前，(1,1)和(1,2)处的奶牛的饲养成本为 1，(2,1)处的奶牛的饲养成本为 100，(2,2)处的奶牛的饲养成本为 500。602 第一次翻转后，(1,1)处路标的方向由 R 变为 D，(1,1)处的奶牛现在需要花费 100 美元饲喂（其他路标保持不变），因此现在的总费用为 701 第二次和第三次翻转后，同一路标来回切换。第四次翻转后，(1,1)和(2,1)处的奶牛现在需要花费 500喂养，总成本为 1501.
+
+Ans in c++ :
+```
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+const int N = 1505;
+long long n, ans, a[N][N], q, x, y;
+char c[N][N];
+bool cnt[N][N];
+
+void dfs(long long x, long long y, long long sum)
+{
+	if(x == 0 || y == 0)
+		return ;
+	a[x][y] = sum;
+	ans += sum;
+	if(c[x-1][y] == 'D')
+		dfs(x-1, y, sum);
+	if(c[x][y-1] == 'R')
+		dfs(x, y-1, sum);
+	return ;
+}
+
+void dfs1(long long x, long long y, long long sum)
+{
+	if(x == 0 || y == 0)
+		return ;
+	ans -= a[x][y];
+	a[x][y] = sum;
+	ans += a[x][y];
+	if(c[x-1][y] == 'D')
+		dfs1(x-1, y, sum);
+	if(c[x][y-1] == 'R')
+		dfs1(x, y-1, sum);
+	return ;
+}
+
+int main(int argc, char** argv)
+{
+	scanf("%d", &n);
+	for(int i = 1;i <= n;i++)
+	{
+		for(int j = 1;j <= n;j++)
+			cin >> c[i][j];
+		scanf("%d", &a[i][n+1]);
+	}
+	for(int i = 1;i <= n;i++)
+		scanf("%d", &a[n+1][i]);
+	for(int i = 1;i <= n;i++)
+	{
+		if(c[i][n] == 'R')
+			dfs(i, n, a[i][n + 1]);
+		if(c[n][i] == 'D')
+			dfs(n, i, a[n + 1][i]);
+	}
+	printf("%d\n", ans);
+	cin >> q;
+	while(q--)
+	{
+		cin >> x >> y;
+		if(c[x][y] == 'R')
+		{
+			c[x][y] = 'D';
+			ans -= a[x][y];
+			a[x][y] = a[x+1][y];
+			ans += a[x][y];
+			dfs1(x, y, a[x][y]);
+		}
+		else
+		{
+			c[x][y] = 'R';
+			ans -= a[x][y];
+			a[x][y] = a[x][y+1];
+			ans += a[x][y];
+			dfs1(x, y, a[x][y]);
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}
+```
