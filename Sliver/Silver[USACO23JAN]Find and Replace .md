@@ -1,6 +1,8 @@
 # [USACO23JAN] Find and Replace
 原题link: https://usaco.org/index.php?page=viewproblem2&cpid=1278
 
+同源金组题:https://usaco.org/index.php?page=viewproblem2&cpid=1281
+
 ## 题目描述
 
 Bessie 正在使用世界上最先进最伟大的文本编辑器：miV！她想将一个仅由大写和小写英文字母组成的字符串转换为一个新的字符串。每一次操作，miV 可以将字符串中所有的字母 c1 替换成另一种字母 c2。例：对于字符串aAbBa, 如果将其中的 a 替换成 B, 那么字符串会变为BAbBB。
