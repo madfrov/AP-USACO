@@ -110,3 +110,42 @@ Bessie 有一个数组 a1,⋯,aN*，其中 1≤N≤300 并对于所有 i有 0 �
 - 测试点 55 满足 r1,N<=1。
 - 测试点 6−8 满足对于所有 1≤i*<*N* 均有 ri,i+1=1。
 - 测试点 9−14没有额外限制。
+
+```
+maxN = 310
+a = [[0] * maxN for _ in range(maxN)]  # 初始化一个二维数组a，用于存储输入的数
+ans = [0] * maxN  # 初始化数组ans，存储计算结果
+
+def main():
+    n = int(input())  # 输入n，表示矩阵的大小
+    for i in range(1, n + 1):
+        values = list(map(int, input().split()))  # 输入第i行的数，并转换为整数列表
+        for j, value in enumerate(values, start=i):  # 从第i列开始填入数据
+            a[i][j] = value
+    
+    ans[1] = 0  # 初始化第一个结果为0
+    ans[2] = ans[1] + a[1][2]  # 计算第二个结果
+    last = 2  # 初始化last为2，表示上一个已计算的索引
+
+    # 从第3个元素开始遍历到第n个元素
+    for i in range(3, n + 1):
+        if a[last-1][i] == a[last-1][last] + a[last][i]:  # 检查是否满足某个条件
+            if ans[last] > ans[last-1]:
+                ans[i] = ans[last] + a[last][i]  # 根据条件更新ans[i]
+            else:
+                ans[i] = ans[last] - a[last][i]
+        elif a[last-1][i] < a[last-1][last] + a[last][i]:  # 检查另一个条件
+            if ans[last] > ans[last-1]:
+                ans[i] = ans[last] - a[last][i]
+            else:
+                ans[i] = ans[last] + a[last][i]
+        if a[i-1][i] != 0:  # 如果a[i-1][i]不是0，更新last
+            last = i
+
+    for i in range(1, n + 1):  # 输出结果数组
+        print(ans[i], end=" ")
+    print()
+
+if __name__ == "__main__":
+    main()
+```
