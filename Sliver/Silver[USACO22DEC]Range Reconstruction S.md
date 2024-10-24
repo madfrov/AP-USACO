@@ -149,3 +149,64 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+By Apg2-1张皓然
+```
+#include<bits/stdc++.h>
+using namespace std;
+int n,m,weight;
+int const N=3e2+10;
+int a[N][N]; 
+int dp[N];
+bool check(int ind)
+{
+	
+	int ma,mi;
+	for(int i=1;i<=ind;i++)
+	{
+		ma=dp[i];
+		mi=dp[i];
+		for(int j=i;j<=ind;j++)
+		{
+			ma=max(dp[j],ma);
+			mi=min(dp[j],mi);
+		}
+		if(a[i][ind]!=ma-mi)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+int main()                           
+{
+	cin>>n;
+	dp[0]=0;//初始化为0，随便设定的 
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=i;j<=n;j++)
+		{
+			
+			cin>>a[i][j];
+		}
+	}
+	for(int i=2;i<=n;i++)
+	{
+		dp[i]=dp[i-1]+a[i-1][i];
+	
+		if(check(i))
+		{
+			continue;
+		}
+		else
+		{
+			dp[i]=dp[i-1]-a[i-1][i];
+		}
+		
+	}
+	for(int i=1;i<=n;i++)
+	{
+		cout<<dp[i]<<" ";
+	}
+	return 0;
+}
+```
