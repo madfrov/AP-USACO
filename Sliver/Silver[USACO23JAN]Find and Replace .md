@@ -132,3 +132,105 @@ if __name__ == "__main__":
     main()
 ```
 
+By AP G2-1 文奉璋
+```
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll T,in[100000],to[100000],visited[100000],cnt,ans;
+
+vector<vector<ll> >lst(100000);
+char a[1000],b[1000];
+
+void loop(ll x){
+    visited[x]=1;
+    ans++;
+    if (visited[to[x]]==0) loop(to[x]);
+}
+int main(){
+    ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
+    cin>>T;
+    while (T--){
+        cin>>a>>b;
+        ll l = strlen(a);
+        ans=0;
+        queue<ll>q;
+        bool flag=false;
+        memset(to, 0, sizeof to);
+        memset(in, 0, sizeof in);
+        memset(visited, 0, sizeof visited);
+        set<char> roy;
+
+
+        for (ll i=0;i<l;i++){
+            if (to[a[i]]==0||to[a[i]]==b[i]){
+                to[a[i]]=b[i];
+                in[b[i]]++;
+            }
+            else flag=true;
+            roy.insert(b[i]);
+        }
+        // Case: Two out
+        if (flag) {
+            cout<<-1<<endl;
+            continue;
+        }
+        // Case: Maximum Char letters
+        if (roy.size()==52) {
+            if(strcmp(a,b)==0) cout<<0<<endl;
+            else cout<<-1<<endl;
+            continue;
+        }
+        // Search
+        for (ll i='A';i<='Z';i++){
+            if (in[i]==0&&to[i]) q.push(i);
+        }
+        for (ll i='a';i<='z';i++){
+            if (in[i]==0&&to[i]) q.push(i);
+        }
+//        while (!q.empty()){
+//            cout<<q.front()<<endl;
+//            q.pop();
+//        }
+//        return 0;
+        while(!q.empty()){
+            cnt=q.front();
+//            cout<<q.front()<<endl;
+            q.pop();
+            if (visited[cnt]) continue;
+            visited[cnt]=1;
+            if (to[cnt]!=cnt&&to[cnt]!=0)ans++;
+            if (visited[to[cnt]]==0){
+                q.push(to[cnt]);
+                in[to[cnt]]=0;
+            }
+        }
+//        cout<<ans;
+//        return 0;
+
+
+
+        // Loops
+        for (ll i='A';i<='Z';i++)
+            if (visited[i]==0&&to[i]!=i&&to[i]!=0){
+                loop(i);
+                ans++;
+            }
+
+        for (ll i='a';i<='z';i++)
+            if (visited[i]==0&&to[i]!=i&&to[i]!=0){
+                loop(i);
+                ans++;
+            }
+
+
+        cout<<ans<<endl;
+
+
+    }
+    return 0;
+}
+
+```
+
+
