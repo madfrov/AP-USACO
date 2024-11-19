@@ -37,3 +37,41 @@
 ## 说明/提示
 
 在这个简单的例子中，4块草地以一条直线的形式相连。最少需要三种草。例如，Farmer John可以用草A，B和C将草地按A - B - C - A的方式播种。
+
+```
+def add(u, v, lst, nxt, to, d):
+    global tot
+    tot += 1
+    to[tot] = v
+    d[v] += 1  # Increment the in-degree
+    nxt[tot] = lst[u]
+    lst[u] = tot
+
+def main():
+    import sys
+    input = sys.stdin.readline
+
+    n = int(input().strip())
+    global tot
+    tot = 0
+
+    mxn = 100005
+    lst = [0] * mxn
+    nxt = [0] * (mxn * 2)
+    to = [0] * (mxn * 2)
+    d = [0] * mxn
+
+    for _ in range(n - 1):
+        a, b = map(int, input().strip().split())
+        add(a, b, lst, nxt, to, d)
+        add(b, a, lst, nxt, to, d)
+
+    ans = 0
+    for i in range(1, n + 1):
+        ans = max(ans, d[i] + 1)
+
+    print(ans)
+
+if __name__ == "__main__":
+    main()
+```
