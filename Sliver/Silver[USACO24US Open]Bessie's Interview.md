@@ -65,3 +65,36 @@ Bessie 正在寻找新工作！幸运的是，K* 名农夫目前正在招聘并�
 - 测试点 2−3：没有两名农夫同时完成面试。
 - 测试点 4−9：N≤3⋅103。
 - 测试点 10−21：没有额外限制。
+
+
+python solution
+```
+import heapq
+
+N, K = map(int, input().split())
+
+T = list(map(int, input().split()))
+times = [0] * K
+
+edges_into = dict()
+
+for t in T:
+    start = heapq.heappop(times)
+    end = start + t
+    edges_into.setdefault(end, []).append(start)
+    heapq.heappush(times, end)
+
+q = [heapq.heappop(times)]
+vis = set()
+for x in q:
+    if x in vis:
+        continue
+    vis.add(x)
+    if x not in edges_into:
+        continue
+    for prv in edges_into[x]:
+        q.append(prv)
+
+print(q[0])
+print("".join(["1" if t in vis else "0" for t in T[:K]]))
+```
