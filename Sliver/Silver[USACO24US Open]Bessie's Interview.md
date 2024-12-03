@@ -98,3 +98,107 @@ for x in q:
 print(q[0])
 print("".join(["1" if t in vis else "0" for t in T[:K]]))
 ```
+
+by 陈厚达
+```
+import heapq
+from collections import deque
+
+
+class binary_heapq:
+    def __init__(self):
+        self.data = []
+
+    def push(self, number):
+        heapq.heappush(self.data, number)
+
+    def pop_smallest(self):
+        result = heapq.heappop(self.data)
+        return result
+
+
+# This great class also carries the task of
+# remembering whether this timestamp is visited
+# in the later codes.
+class kv:
+    def __init__(self):
+        self.dict1 = {}
+
+    def add_value_to_key(self, value, key):
+        got = self.dict1.get(key)
+        if got is None:
+            self.dict1[key] = [[value], False]
+        else:
+            self.dict1[key][0].append(value)
+
+    def get_value_of_key(self, key):
+        return self.dict1.get(key)[0]
+
+    def set_visited(self, key):
+        self.dict1[key][1] = True
+
+    def is_visited(self, key):
+        return self.dict1[key][1]
+
+
+first_line = input().split()
+Number_of_cows = int(first_line[0])
+number_of_Farmers = int(first_line[1])
+cow_times = list(map(int, input().split()))
+cow_starts = [-1 for cs in range(Number_of_cows)]
+cow_ends = [-1 for ce in range(Number_of_cows)]
+# print(cow_times)
+
+cow_ids_finished_at_times = kv()
+
+# Get the timestamp for Bessie to start, push the timestamps of finishing into heapq
+# and by the way figure out the startings and endings of each cow
+farmers_windows = binary_heapq()
+next_interview = 0
+for i in range(number_of_Farmers):
+    cow_starts[next_interview] = 0
+    cow_ends[next_interview] = cow_times[next_interview]
+    farmers_windows.push(cow_times[next_interview])
+    cow_ids_finished_at_times.add_value_to_key(i, cow_ends[next_interview])
+    next_interview += 1
+while next_interview < len(cow_times):
+    this_farmer_already_used_time = farmers_windows.pop_smallest()
+    cow_starts[next_interview] = this_farmer_already_used_time
+    cow_ends[next_interview] = this_farmer_already_used_time + cow_times[next_interview]
+    farmers_windows.push(this_farmer_already_used_time + cow_times[next_interview])
+    cow_ids_finished_at_times.add_value_to_key(next_interview, cow_ends[next_interview])
+    next_interview += 1
+Bessie_interview_timestamp = farmers_windows.pop_smallest()
+
+print(Bessie_interview_timestamp)
+
+visited_cow = [False for i in range(Number_of_cows)]
+q = deque()
+got_out = cow_ids_finished_at_times.get_value_of_key(Bessie_interview_timestamp)
+for g in got_out:
+    q.appendleft(g)
+
+# bfs
+# find the possible cows Bessie can go after,
+# and the cows which those cows can go after,
+# and...
+ans = []
+while len(q) > 0:
+    meow = q.pop()
+    start_of_meow = cow_starts[meow]
+    visited_cow[meow] = True
+    if meow < number_of_Farmers:
+        ans.append(meow)
+    elif start_of_meow > 0 and not cow_ids_finished_at_times.is_visited(start_of_meow):
+        cow_ids_finished_at_times.set_visited(start_of_meow)
+        got_out = cow_ids_finished_at_times.get_value_of_key(start_of_meow)
+        for g in got_out:
+            q.appendleft(g)
+
+# build the result
+farmers_result = [0 for i in range(number_of_Farmers)]
+for i in ans:
+    farmers_result[i] = 1
+print("".join(list(map(str, farmers_result))))
+
+```
